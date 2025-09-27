@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Scanner - Sahayak</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="qr-scanner.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fas fa-hand-holding-medical"></i>
+                <span>Sahayak</span>
+            </div>
+            <div class="header-title">QR Scanner</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="qr-scanner-container">
+        <div class="container">
+            <!-- Scanner Section -->
+            <section class="scanner-section">
+                <div class="scanner-header">
+                    <h1>QR Code Scanner</h1>
+                    <p class="scanner-subtitle">Scan QR code to view patient records</p>
+                </div>
+
+                <!-- Scanner Box -->
+                <div class="scanner-box">
+                    <div id="qr-reader" class="qr-reader">
+                        <div class="camera-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <p>Camera Preview</p>
+                        </div>
+                    </div>
+                    <div class="scanner-overlay">
+                        <div class="scanner-frame">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                        </div>
+                        <div class="scanning-line"></div>
+                    </div>
+                    
+                    <div class="scanner-status">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="scanner-status-text">Click Start Camera to begin scanning</span>
+                    </div>
+                </div>
+
+                <!-- Camera Error Message -->
+                <div id="camera-error" class="camera-error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p id="error-message">Camera error message</p>
+                    <div class="error-solutions">
+                        <h4>Try these solutions:</h4>
+                        <ul>
+                            <li>Allow camera permissions in browser settings</li>
+                            <li>Use Google Chrome browser</li>
+                            <li>Ensure you're on HTTPS or localhost</li>
+                            <li>Use the manual input option below</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="scanner-actions">
+                    <button id="start-camera" class="scan-button primary">
+                        <i class="fas fa-camera"></i>
+                        Start Camera
+                    </button>
+                    <button id="stop-camera" class="scan-button secondary" disabled>
+                        <i class="fas fa-stop"></i>
+                        Stop Camera
+                    </button>
+                    <button id="simulate-scan" class="scan-button secondary">
+                        <i class="fas fa-bolt"></i>
+                        Simulate Scan
+                    </button>
+                </div>
+
+                <!-- Manual Input Option -->
+                <div class="manual-input">
+                    <p>Or enter patient ID manually:</p>
+                    <div class="input-group">
+                        <input type="text" id="manual-code" placeholder="Enter patient ID (e.g., PAT12345)">
+                        <button id="submit-manual" class="submit-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>Patient Records</h2>
+                    <button id="scan-again" class="scan-again-btn">
+                        <i class="fas fa-redo"></i>
+                        Scan Again
+                    </button>
+                </div>
+
+                <div class="patient-card">
+                    <div class="patient-header">
+                        <div class="patient-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="patient-info">
+                            <h3 id="patient-name">Loading...</h3>
+                            <p id="patient-id">ID: ---</p>
+                        </div>
+                    </div>
+
+                    <div class="patient-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Age:</span>
+                            <span id="patient-age" class="detail-value">--</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gender:</span>
+                            <span id="patient-gender" class="detail-value">--</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Blood Group:</span>
+                            <span id="patient-blood" class="detail-value">--</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Visit:</span>
+                            <span id="patient-last-visit" class="detail-value">--</span>
+                        </div>
+                    </div>
+
+                    <div class="medical-history">
+                        <h4>Medical History</h4>
+                        <div id="medical-history" class="history-list">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="action-btn view-full">
+                            <i class="fas fa-file-medical"></i>
+                            View Full Records
+                        </button>
+                        <button class="action-btn add-record">
+                            <i class="fas fa-plus"></i>
+                            Add New Record
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="qr-scanner.js"></script>
+</body>
+</html>

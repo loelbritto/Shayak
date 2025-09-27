@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <link rel="stylesheet" href="symptom-checker.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Symptom Checker</h1>
+            <p>Answer a few questions to understand your symptoms</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="question-container" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="result-container" id="result-container">
+            <!-- Results will be displayed here -->
+        </div>
+        
+        <div class="video-call-container" id="video-call-container">
+            <h2>Emergency Video Consultation</h2>
+            <p>You are now connected with a healthcare professional</p>
+            <div class="video-placeholder">
+                <div class="video-feed" id="local-video"></div>
+                <div class="video-feed remote" id="remote-video">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <p>Dr. Smith</p>
+                </div>
+            </div>
+            <div class="call-controls">
+                <button class="control-btn" id="mute-btn">🔇</button>
+                <button class="control-btn" id="video-btn">📹</button>
+                <button class="control-btn end-call" id="end-call-btn">📞</button>
+            </div>
+            <div class="call-timer" id="call-timer">00:00</div>
+        </div>
+        
+        <div class="queue-container" id="queue-container">
+            <!-- Queue information will be displayed here -->
+        </div>
+    </div>
+
+    <script src="symptom-checker.js"></script>
+</body>
+</html>

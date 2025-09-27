@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahayak - Your Village Clinic</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            color: #000;
+        }
+        
+        .modal-header {
+            padding: 20px 30px 0;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #1f2937;
+        }
+        
+        .modal-body {
+            padding: 20px 30px 30px;
+        }
+        
+        .service-icon {
+            font-size: 4rem;
+            color: #2563eb;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Offline Indicator */
+        #offlineIndicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1001;
+            display: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Back Button Progress */
+        .back-progress {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(37, 99, 235, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Indicator -->
+    <div id="offlineIndicator">
+        <i class="fas fa-wifi-slash"></i> You are currently offline. Some features may not be available.
+    </div>
+
+    <!-- Back Progress Indicator -->
+    <div class="back-progress" id="backProgress">
+        <i class="fas fa-arrow-left"></i>
+        <span>Returning to previous page...</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-hand-holding-medical"></i>
+                <span>Sahayak</span>
+            </div>
+            <div class="tagline">Your Village Clinic</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to Sahayak</h1>
+                <p class="hero-subtitle">Your complete healthcare companion</p>
+                
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-wifi"></i>
+                        <span>Works offline</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-microphone"></i>
+                        <span>Voice guidance available</span>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="showServiceModal('Health Check-Up')">
+                    <i class="fas fa-stethoscope"></i>
+                    Start My Health Check-Up
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions Grid -->
+    <section class="quick-actions">
+        <div class="container">
+            <h2>Main Services</h2>
+            <div class="actions-grid">
+				
+                <!-- Row 1 -->
+                <div class="action-card ai-assistant">
+                    <div class="icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Consult a Doctor</h3>
+                    <p>Connect to your nearest doctor with a single click</p>
+                    <a href="doctor.html" class="action-btn" onclick="trackNavigation('doctor')">Start</a>
+                </div>
+
+                <div class="action-card body-map">
+                    <div class="icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Body Map</h3>
+                    <p>Tap on the body to identify pain points</p>
+                    <a href="body-map.html" class="action-btn" onclick="trackNavigation('body-map')">Start</a>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="action-card qr-scanner">
+                    <div class="icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3>QR Scanner</h3>
+                    <p>Access patient records instantly</p>
+                    <a href="qr-scanner.html" class="action-btn" onclick="trackNavigation('qr-scanner')">Scan</a>
+                </div>
+
+                <div class="action-card symptom-checker">
+                    <div class="icon">
+                        <i class="fas fa-diagnoses"></i>
+                    </div>
+                    <h3>Symptom Checker</h3>
+                    <p>Answer simple questions to understand symptoms</p>
+                    <button class="action-btn" onclick="showServiceModal('Symptom Checker')">Check</button>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="action-card medicine-finder">
+                    <div class="icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Medicine Finder</h3>
+                    <p>Find medicines at local pharmacies near you</p>
+                    <a href="medicine-finder.html" class="action-btn" onclick="trackNavigation('medicine-finder')">Find</a>
+                </div>
+
+                <div class="action-card heatmap">
+                    <div class="icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Outbreak Heatmap</h3>
+                    <p>View predictive outbreak maps for your area</p>
+                    <a href="outbreak-heatmap.html" class="action-btn" onclick="trackNavigation('outbreak-heatmap')">View</a>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="action-card farmer-health">
+                    <div class="icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>Farmer Health</h3>
+                    <p>Seasonal advisories and first-aid for farmers</p>
+                    <a href="farmer-health.html" class="action-btn" onclick="trackNavigation('farmer-health')">Explore</a>
+                </div>
+
+                <div class="action-card medicine-basket">
+                    <div class="icon">
+                        <i class="fas fa-shopping-basket"></i>
+                    </div>
+                    <h3>Medicine Basket</h3>
+                    <p>Pool medicine orders with your community</p>
+                    <a href="medicine-basket.html" class="action-btn" onclick="trackNavigation('medicine-basket')">Join</a>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="action-card health-metrics">
+                    <div class="icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Health Metrics</h3>
+                    <p>Track your vital signs and health data accurately</p>
+                    <a href="health-metrics.html" class="action-btn" onclick="trackNavigation('health-metrics')">Track</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section class="emergency-section">
+        <div class="container">
+            <div class="emergency-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="emergency-content">
+                    <h3>Medical Emergency?</h3>
+                    <p>For immediate medical assistance, call emergency services</p>
+                    <div class="emergency-contacts">
+                        <a href="tel:108" class="emergency-btn">
+                            <i class="fas fa-phone"></i>
+                            Call 108 (Ambulance)
+                        </a>
+                        <a href="tel:102" class="emergency-btn">
+                            <i class="fas fa-ambulance"></i>
+                            Call 102 (Emergency)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        <span>Sahayak</span>
+                    </div>
+                    <p>Bringing healthcare to every village</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sahayak. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

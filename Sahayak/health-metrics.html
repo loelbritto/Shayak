@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics - Sahayak</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="health-metrics.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Health Metrics</span>
+            </div>
+            <div class="tagline">Track Your Vital Signs</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Current Metrics Section -->
+            <section class="current-metrics">
+                <h2>Current Health Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Heart Rate</h3>
+                            <div class="metric-value" id="heartRate">--</div>
+                            <span class="metric-unit">BPM</span>
+                        </div>
+                        <div class="metric-status" id="heartRateStatus">--</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Blood Pressure</h3>
+                            <div class="metric-value" id="bloodPressure">--/--</div>
+                            <span class="metric-unit">mmHg</span>
+                        </div>
+                        <div class="metric-status" id="bloodPressureStatus">--</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Body Temperature</h3>
+                            <div class="metric-value" id="temperature">--</div>
+                            <span class="metric-unit">°C</span>
+                        </div>
+                        <div class="metric-status" id="temperatureStatus">--</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-lungs"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Oxygen Saturation</h3>
+                            <div class="metric-value" id="oxygen">--</div>
+                            <span class="metric-unit">% SpO₂</span>
+                        </div>
+                        <div class="metric-status" id="oxygenStatus">--</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Weight</h3>
+                            <div class="metric-value" id="weight">--</div>
+                            <span class="metric-unit">kg</span>
+                        </div>
+                        <div class="metric-status" id="weightStatus">--</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-ruler"></i>
+                        </div>
+                        <div class="metric-info">
+                            <h3>Height</h3>
+                            <div class="metric-value" id="height">--</div>
+                            <span class="metric-unit">cm</span>
+                        </div>
+                        <div class="metric-status" id="heightStatus">--</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2>Record New Metrics</h2>
+                <form class="metrics-form" id="metricsForm">
+                    <div class="form-group">
+                        <label for="heartRateInput">Heart Rate (BPM)</label>
+                        <input type="number" id="heartRateInput" min="30" max="200" placeholder="e.g., 72">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="systolicInput">Systolic BP</label>
+                            <input type="number" id="systolicInput" min="60" max="200" placeholder="120">
+                        </div>
+                        <div class="form-group">
+                            <label for="diastolicInput">Diastolic BP</label>
+                            <input type="number" id="diastolicInput" min="40" max="150" placeholder="80">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="temperatureInput">Temperature (°C)</label>
+                        <input type="number" id="temperatureInput" min="35" max="42" step="0.1" placeholder="36.6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="oxygenInput">Oxygen Saturation (%)</label>
+                        <input type="number" id="oxygenInput" min="70" max="100" placeholder="98">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weightInput">Weight (kg)</label>
+                            <input type="number" id="weightInput" min="20" max="200" step="0.1" placeholder="65.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="heightInput">Height (cm)</label>
+                            <input type="number" id="heightInput" min="100" max="250" placeholder="170">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i>
+                        Save Metrics
+                    </button>
+                </form>
+            </section>
+
+            <!-- History Section -->
+            <section class="history-section">
+                <h2>Recent Records</h2>
+                <div class="history-list" id="historyList">
+                    <!-- History items will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="health-metrics.js"></script>
+</body>
+</html>

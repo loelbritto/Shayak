@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Basket - Sahayak</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="medicine-basket.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fas fa-shopping-basket"></i>
+                <span>Medicine Basket</span>
+            </div>
+            <div class="tagline">Pool Orders with Community</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Order Form Section -->
+            <section class="order-section">
+                <h2>Add Medicine to Community Basket</h2>
+                <div class="order-form-container">
+                    <form class="order-form" id="orderForm">
+                        <div class="form-group">
+                            <label for="medicineName">
+                                <i class="fas fa-pills"></i>
+                                Enter medicine name
+                            </label>
+                            <input type="text" id="medicineName" placeholder="e.g., Paracetamol, Amoxicillin..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="medicineQuantity">
+                                <i class="fas fa-boxes"></i>
+                                Enter bulk quantity
+                            </label>
+                            <input type="number" id="medicineQuantity" min="1" max="1000" placeholder="e.g., 50 tablets, 100ml..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgencyLevel">
+                                <i class="fas fa-clock"></i>
+                                Urgency level
+                            </label>
+                            <select id="urgencyLevel">
+                                <option value="low">Low (Within 2 weeks)</option>
+                                <option value="medium">Medium (Within 1 week)</option>
+                                <option value="high">High (Within 3 days)</option>
+                                <option value="critical">Critical (Within 24 hours)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-cart-plus"></i>
+                            Add to Community Basket
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Animation Section -->
+            <section class="animation-section" id="animationSection" style="display: none;">
+                <div class="animation-container">
+                    <div class="basket-animation" id="basketAnimation">
+                        <div class="medicine-pill" id="medicinePill">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="basket" id="basket">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                    </div>
+                    <div class="order-status" id="orderStatus">
+                        <h3>Order Placed!</h3>
+                        <p>Your medicine has been added to the community basket</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Orders Section -->
+            <section class="community-orders">
+                <h2>Community Medicine Basket</h2>
+                <div class="orders-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="communityMembers">12</span>
+                            <span class="stat-label">Community Members</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-pills"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalOrders">8</span>
+                            <span class="stat-label">Active Orders</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="orders-list" id="ordersList">
+                    <!-- Orders will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="medicine-basket.js"></script>
+</body>
+</html>

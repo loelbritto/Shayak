@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Health - Sahayak</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="farmer-health.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fas fa-tractor"></i>
+                <span>Farmer Health</span>
+            </div>
+            <div class="tagline">Seasonal Advisories & First-Aid</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Weather Section -->
+            <section class="weather-section">
+                <h2>Current Weather in Nabha, Punjab</h2>
+                <div class="weather-card" id="weatherCard">
+                    <div class="weather-icon">
+                        <i class="fas fa-sun" id="weatherIcon"></i>
+                    </div>
+                    <div class="weather-info">
+                        <div class="temperature" id="temperature">--°C</div>
+                        <div class="weather-desc" id="weatherDesc">Loading...</div>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nabha, Punjab</span>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <span id="windSpeed">-- km/h</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <span id="humidity">--%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Precautions Section -->
+            <section class="precautions-section">
+                <h2>Recommended Precautions & Actions</h2>
+                <div class="precautions-grid" id="precautionsGrid">
+                    <!-- Precautions will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Follow-up Question -->
+            <section class="question-section">
+                <div class="question-card">
+                    <h3>Are you already following these precautions?</h3>
+                    <p>Your answer will help us provide more specific advice</p>
+                    <div class="answer-buttons">
+                        <button class="answer-btn yes-btn" id="yesBtn">
+                            <i class="fas fa-check-circle"></i>
+                            Yes, I'm following
+                        </button>
+                        <button class="answer-btn no-btn" id="noBtn">
+                            <i class="fas fa-times-circle"></i>
+                            No, not yet
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Precautions Section -->
+            <section class="additional-precautions" id="additionalPrecautions" style="display: none;">
+                <h2>Additional Advanced Recommendations</h2>
+                <div class="additional-grid" id="additionalGrid">
+                    <!-- Additional precautions will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- First Aid Section -->
+            <section class="firstaid-section">
+                <h2>Essential First-Aid for Farmers</h2>
+                <div class="firstaid-grid">
+                    <div class="firstaid-card">
+                        <div class="firstaid-icon heatstroke">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <h3>Heat Stroke</h3>
+                        <ul>
+                            <li>Move to shade immediately</li>
+                            <li>Cool with wet cloths</li>
+                            <li>Hydrate with ORS</li>
+                            <li>Seek medical help if severe</li>
+                        </ul>
+                    </div>
+
+                    <div class="firstaid-card">
+                        <div class="firstaid-icon injury">
+                            <i class="fas fa-hand-holding-medical"></i>
+                        </div>
+                        <h3>Field Injuries</h3>
+                        <ul>
+                            <li>Clean wound with clean water</li>
+                            <li>Apply antiseptic</li>
+                            <li>Cover with sterile bandage</li>
+                            <li>Tetanus shot if deep wound</li>
+                        </ul>
+                    </div>
+
+                    <div class="firstaid-card">
+                        <div class="firstaid-icon chemical">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Chemical Exposure</h3>
+                        <ul>
+                            <li>Wash with plenty of water</li>
+                            <li>Remove contaminated clothing</li>
+                            <li>Don't rub eyes if exposed</li>
+                            <li>Seek immediate medical help</li>
+                        </ul>
+                    </div>
+
+                    <div class="firstaid-card">
+                        <div class="firstaid-icon snake">
+                            <i class="fas fa-staff-snake"></i>
+                        </div>
+                        <h3>Snake Bites</h3>
+                        <ul>
+                            <li>Keep patient calm and still</li>
+                            <li>Don't cut wound or suck venom</li>
+                            <li>Immobilize the bitten area</li>
+                            <li>Transport to hospital immediately</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="farmer-health.js"></script>
+</body>
+</html>

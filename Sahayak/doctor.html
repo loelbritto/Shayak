@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Consultation</title>
+    <link rel="stylesheet" href="doctor.css">
+</head>
+<body>
+    <div class="consultation-container">
+        <!-- Header Section -->
+        <header class="consultation-header">
+            <div class="doctor-info">
+                <img src="https://i.pravatar.cc/50" alt="Doctor Avatar" class="doctor-avatar">
+                <div>
+                    <h2>Dr. Sarah Johnson</h2>
+                    <p>Cardiologist • Online</p>
+                </div>
+            </div>
+            <div class="call-controls">
+                <button id="videoToggle" class="control-btn">📹</button>
+                <button id="audioToggle" class="control-btn">🎤</button>
+                <button id="endCall" class="control-btn end-call">📞</button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="consultation-main">
+            <!-- Video/Audio Section -->
+            <section class="media-section">
+                <div class="video-container">
+                    <video id="localVideo" autoplay muted></video>
+                    <video id="remoteVideo" autoplay></video>
+                    <div class="video-overlay">
+                        <div class="connection-status">
+                            <span class="status-dot"></span>
+                            <span>Connected</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section class="chat-section">
+                <div class="chat-header">
+                    <h3>Chat</h3>
+                    <button id="toggleChat" class="toggle-btn">−</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be inserted here by JavaScript -->
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="messageInput" placeholder="Type your message...">
+                    <button id="sendMessage" class="send-btn">➤</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Side Panel -->
+        <aside class="side-panel">
+            <!-- Patient Info -->
+            <div class="patient-info">
+                <h3>Patient Information</h3>
+                <div class="info-item">
+                    <span class="label">Name:</span>
+                    <span id="patientName">John Doe</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Age:</span>
+                    <span id="patientAge">45</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Condition:</span>
+                    <span id="patientCondition">Hypertension</span>
+                </div>
+            </div>
+
+            <!-- Medical Tools -->
+            <div class="medical-tools">
+                <h3>Medical Tools</h3>
+                <div class="tools-grid">
+                    <button class="tool-btn" id="prescriptionTool">💊 Prescription</button>
+                    <button class="tool-btn" id="labTool">🩺 Lab Request</button>
+                    <button class="tool-btn" id="notesTool">📝 Notes</button>
+                    <button class="tool-btn" id="vitalsTool">❤️ Vitals</button>
+                </div>
+            </div>
+
+            <!-- File Sharing -->
+            <div class="file-sharing">
+                <h3>Shared Files</h3>
+                <div class="files-list" id="filesList">
+                    <!-- Files will be listed here -->
+                </div>
+                <input type="file" id="fileInput" style="display: none;">
+                <button class="upload-btn" id="uploadBtn">Upload File</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals -->
+    <div id="prescriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Create Prescription</h3>
+            <form id="prescriptionForm">
+                <input type="text" placeholder="Medication Name" required>
+                <input type="text" placeholder="Dosage" required>
+                <input type="text" placeholder="Frequency" required>
+                <textarea placeholder="Instructions"></textarea>
+                <button type="submit">Send to Patient</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="doctor.js"></script>
+</body>
+</html>

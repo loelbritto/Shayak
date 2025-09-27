@@ -1,0 +1,502 @@
+/* QR Scanner Specific Styles */
+.qr-scanner-container {
+    padding: 2rem 0;
+    min-height: calc(100vh - 80px);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.back-button {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.header-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-left: auto;
+}
+/* Add to your existing qr-scanner.css */
+.camera-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #2d3748;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.camera-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+/* Loading animation */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Status colors */
+.status-error { color: #e53e3e !important; }
+.status-success { color: #38a169 !important; }
+.status-warning { color: #dd6b20 !important; }
+.status-info { color: #3182ce !important; }
+
+/* Button states */
+.scan-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.scan-button.loading {
+    position: relative;
+    color: transparent;
+}
+
+.scan-button.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Scanner Section */
+.scanner-section {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.scanner-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.scanner-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.scanner-box {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--primary);
+}
+
+.qr-reader {
+    width: 100%;
+    height: 300px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Scanner Overlay */
+.scanner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.scanner-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 2px solid #00ff00;
+}
+
+.corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #00ff00;
+}
+
+.corner.top-left {
+    top: -3px;
+    left: -3px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.corner.top-right {
+    top: -3px;
+    right: -3px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.corner.bottom-left {
+    bottom: -3px;
+    left: -3px;
+    border-right: none;
+    border-top: none;
+}
+
+.corner.bottom-right {
+    bottom: -3px;
+    right: -3px;
+    border-left: none;
+    border-top: none;
+}
+
+.scanning-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 2px;
+    background: #00ff00;
+    transform: translateX(-50%);
+    animation: scan 2s infinite linear;
+}
+
+.camera-error {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: left;
+    display: none;
+}
+
+.camera-error i {
+    color: #dc2626;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.error-solutions {
+    margin-top: 1rem;
+}
+
+.error-solutions h4 {
+    color: #7f1d1d;
+    margin-bottom: 0.5rem;
+}
+
+.error-solutions ul {
+    color: #7f1d1d;
+    padding-left: 1.5rem;
+}
+
+.error-solutions li {
+    margin-bottom: 0.5rem;
+}
+
+@keyframes scan {
+    0% { top: 50%; }
+    50% { top: calc(50% + 180px); }
+    100% { top: 50%; }
+}
+
+.scanner-status {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+}
+
+.scanner-status i {
+    color: var(--primary);
+}
+
+/* Scanner Actions */
+.scanner-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.scan-button {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.scan-button.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.scan-button.secondary {
+    background: var(--bg-light);
+    color: var(--text);
+    border: 1px solid var(--text-light);
+}
+
+.scan-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.scan-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Manual Input */
+.manual-input {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.manual-input p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid var(--text-light);
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+/* Results Section */
+.results-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.results-header h2 {
+    color: var(--text);
+}
+
+.scan-again-btn {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Patient Card */
+.patient-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.patient-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg-light);
+}
+
+.patient-avatar {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.patient-info h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.patient-info p {
+    color: var(--text-light);
+}
+
+.patient-details {
+    margin-bottom: 2rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--bg-light);
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.detail-value {
+    color: var(--text-light);
+}
+
+.medical-history {
+    margin-bottom: 2rem;
+}
+
+.medical-history h4 {
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.history-list {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: var(--radius);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.action-btn.view-full {
+    background: var(--primary);
+    color: white;
+}
+
+.action-btn.add-record {
+    background: var(--secondary);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .scanner-actions {
+        flex-direction: column;
+    }
+    
+    .scan-button {
+        width: 100%;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .scanner-header h1 {
+        font-size: 2rem;
+    }
+    
+    .scanner-frame {
+        width: 150px;
+        height: 150px;
+    }
+}

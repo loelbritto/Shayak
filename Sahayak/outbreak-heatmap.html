@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outbreak Heatmap - Sahayak</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#dc2626"/>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="outbreak-heatmap.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Outbreak Heatmap</span>
+            </div>
+            <div class="header-info">
+                <span class="last-updated">Updated: <span id="updateTime">Today</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <section class="page-header">
+                <h1>Outbreak Heatmap</h1>
+                <p class="subtitle">Predictive heatmap for Nabha and nearby villages</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCases">23</div>
+                        <div class="stat-label">Total Active Cases</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="highRiskAreas">4</div>
+                        <div class="stat-label">High Risk Areas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">7d</div>
+                        <div class="stat-label">Prediction Window</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="affectedVillages">8</div>
+                        <div class="stat-label">Affected Villages</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Heatmap Section -->
+            <section class="heatmap-section">
+                <div class="section-header">
+                    <h2>Disease Heatmap</h2>
+                    <div class="filters">
+                        <select id="disease-filter" class="filter-select">
+                            <option value="all">All Diseases</option>
+                            <option value="malaria">Malaria</option>
+                            <option value="dengue">Dengue</option>
+                            <option value="flu">Seasonal Flu</option>
+                            <option value="waterborne">Waterborne</option>
+                        </select>
+                        <select id="time-filter" class="filter-select">
+                            <option value="current">Current</option>
+                            <option value="7d">Next 7 Days</option>
+                            <option value="14d">Next 14 Days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Map Container -->
+                <div class="map-container">
+                    <div id="heatmap" class="heatmap"></div>
+                    <div class="map-overlay">
+                        <div class="location-info">
+                            <h4>Nabha Region</h4>
+                            <p>Punjab, India</p>
+                            <div class="risk-level medium">Medium Risk</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Legend -->
+                <div class="map-legend">
+                    <h4>Map Legend</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <span class="legend-color normal"></span>
+                            <span class="legend-text">Normal (0-2 cases)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color rising"></span>
+                            <span class="legend-text">Rising Cases (3-5 cases)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color outbreak"></span>
+                            <span class="legend-text">Potential Outbreak (6+ cases)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Village List -->
+            <section class="village-list-section">
+                <h3>Affected Villages</h3>
+                <div class="village-list" id="villageList">
+                    <!-- Village list will be dynamically populated -->
+                </div>
+            </section>
+
+            <!-- Prevention Section -->
+            <section class="prevention-section">
+                <h3>Prevention & Simple Cures</h3>
+                <div class="prevention-grid">
+                    <div class="prevention-card">
+                        <div class="prevention-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4>Boiled Drinking Water</h4>
+                        <p>Always drink boiled or purified water to prevent waterborne diseases</p>
+                    </div>
+                    <div class="prevention-card">
+                        <div class="prevention-icon">
+                            <i class="fas fa-mosquito"></i>
+                        </div>
+                        <h4>Use Mosquito Nets</h4>
+                        <p>Sleep under mosquito nets to prevent malaria and dengue</p>
+                    </div>
+                    <div class="prevention-card">
+                        <div class="prevention-icon">
+                            <i class="fas fa-hand-holding-water"></i>
+                        </div>
+                        <h4>Stay Hydrated</h4>
+                        <p>Drink plenty of fluids, especially during hot weather</p>
+                    </div>
+                    <div class="prevention-card">
+                        <div class="prevention-icon">
+                            <i class="fas fa-hands-wash"></i>
+                        </div>
+                        <h4>Maintain Hand Hygiene</h4>
+                        <p>Wash hands regularly with soap and water</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Contacts -->
+            <section class="emergency-section">
+                <div class="emergency-alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="emergency-content">
+                        <h3>Health Emergency?</h3>
+                        <p>Contact local health authorities immediately</p>
+                        <div class="emergency-contacts">
+                            <a href="tel:104" class="emergency-btn">
+                                <i class="fas fa-phone"></i>
+                                Health Helpline: 104
+                            </a>
+                            <a href="tel:108" class="emergency-btn">
+                                <i class="fas fa-ambulance"></i>
+                                Emergency: 108
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Data Source: Punjab Health Department • Updated daily</p>
+            <p class="disclaimer">This is a predictive model. Always consult healthcare professionals.</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Heatmap Plugin -->
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <!-- JavaScript -->
+    <script src="outbreak-heatmap.js"></script>
+</body>
+</html>
